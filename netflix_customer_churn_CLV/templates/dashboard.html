@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Intelligence Console - Netflix CLV Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #17171d; }
+    .brand-font { font-family: 'Bebas Neue', sans-serif; }
+  </style>
+</head>
+<body class="text-zinc-100 min-h-screen py-8 px-4 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Top Bar -->
+    <header class="flex items-center justify-between pb-6 mb-8 border-b border-zinc-800">
+      <div class="flex items-center space-x-3">
+        <span class="brand-font text-4xl tracking-wider text-[#E50914]">NETFLIX</span>
+        <span class="text-xs uppercase font-semibold px-2 py-0.5 rounded bg-red-950 border border-red-800 text-red-300">Admin Portfolio Intelligence</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="{{ url_for('register') }}" class="text-xs bg-[#E50914] hover:bg-red-700 text-white font-medium px-3 py-1.5 rounded transition">
+          + Add New Subscriber
+        </a>
+        <a href="{{ url_for('logout') }}" class="text-xs text-zinc-400 hover:text-white px-3 py-1.5 rounded border border-zinc-700">
+          Logout
+        </a>
+      </div>
+    </header>
+
+    <!-- Top KPI Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+      <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+        <span class="text-xs text-zinc-400 uppercase font-semibold">Registered Subscribers</span>
+        <p class="text-3xl font-extrabold text-white mt-2">{{ total_users }}</p>
+      </div>
+      <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+        <span class="text-xs text-zinc-400 uppercase font-semibold">Average Portfolio Churn Risk</span>
+        <p class="text-3xl font-extrabold text-amber-400 mt-2">{{ avg_churn }}%</p>
+      </div>
+      <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+        <span class="text-xs text-zinc-400 uppercase font-semibold">Subscribers at Critical Risk (>= 60%)</span>
+        <p class="text-3xl font-extrabold text-red-500 mt-2">{{ high_risk_count }}</p>
+      </div>
+    </div>
+
+    <!-- Subscriber Audit Table -->
+    <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+      <div class="p-5 border-b border-zinc-800">
+        <h2 class="text-sm font-bold text-white uppercase tracking-wider">Subscriber Retention & Segmentation Registry</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-zinc-300">
+          <thead class="bg-zinc-950 text-zinc-400 uppercase text-[10px] tracking-wider border-b border-zinc-800">
+            <tr>
+              <th class="px-5 py-3.5">Subscriber</th>
+              <th class="px-5 py-3.5">Plan</th>
+              <th class="px-5 py-3.5">Tenure / Inactivity</th>
+              <th class="px-5 py-3.5">Predicted Churn</th>
+              <th class="px-5 py-3.5">Assigned Persona Cluster</th>
+              <th class="px-5 py-3.5">Target Discount</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-800/80">
+            {% for u in users %}
+            <tr class="hover:bg-zinc-800/40 transition">
+              <td class="px-5 py-4">
+                <span class="font-medium text-white block">{{ u.name }}</span>
+                <span class="text-[11px] text-zinc-500">{{ u.email }}</span>
+              </td>
+              <td class="px-5 py-4">
+                <span class="text-white">{{ u.subscription_type }}</span>
+                <span class="text-zinc-500 block">₹{{ u.monthly_charges }}/mo</span>
+              </td>
+              <td class="px-5 py-4">
+                <span class="text-white">{{ u.tenure_months }} months</span>
+                <span class="text-zinc-500 block">{{ u.last_login_days }}d idle</span>
+              </td>
+              <td class="px-5 py-4">
+                <span class="font-bold {% if u.churn_rate >= 60 %}text-red-400{% elif u.churn_rate >= 35 %}text-amber-400{% else %}text-emerald-400{% endif %}">
+                  {{ u.churn_rate }}%
+                </span>
+              </td>
+              <td class="px-5 py-4 text-zinc-300">
+                {{ u.cluster_name }}
+              </td>
+              <td class="px-5 py-4">
+                <span class="bg-red-950 text-red-300 border border-red-800 px-2 py-0.5 rounded font-mono font-medium">
+                  {{ u.discount_percent }}% OFF
+                </span>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="6" class="px-5 py-8 text-center text-zinc-500">
+                No subscribers registered yet. Click "+ Add New Subscriber" to add one!
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
