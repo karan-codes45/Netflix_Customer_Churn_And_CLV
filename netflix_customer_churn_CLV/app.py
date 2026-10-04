@@ -76,7 +76,17 @@ def init_db():
 init_db()
 
 # ----------------- MACHINE LEARNING ENGINE -----------------
-scaler = StandardScaler()
+# Uses the same preprocessing/model approach as the uploaded Netflix churn notebook:
+# - LabelEncoder separately for each categorical column
+# - LabelEncoder for the churn target
+# - LogisticRegression(max_iter=1000)
+# - KMeans(n_clusters=4, random_state=42, n_init=10)
+#
+# The notebook does NOT apply StandardScaler before fitting the LogisticRegression
+# or KMeans models, so the app follows that same behavior.
+
+from sklearn.preprocessing import LabelEncoder
+
 model = LogisticRegression(max_iter=1000)
 kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
 
@@ -85,8 +95,18 @@ NUM_COLS = [
     'avg_watch_hours_per_week', 'last_login_days', 'support_tickets_raised',
     'num_devices_active', 'has_kids_profile', 'autopay_enabled', 'discount_used'
 ]
-CATEGORICAL_COLS = ['gender', 'region', 'subscription_type', 'device', 'payment_method', 'genre_preference']
+
+CATEGORICAL_COLS = [
+    'gender', 'region', 'subscription_type', 'device',
+    'payment_method', 'genre_preference',
+    'has_kids_profile', 'autopay_enabled', 'discount_used'
+]
+
 MODEL_FEATURE_NAMES = []
+
+# Encoders are fitted once on the same CSV used to train the model.
+encoders = {}
+target_encoder = LabelEncoder()
 
 CLUSTER_METADATA = {
     0: {
@@ -120,31 +140,90 @@ CLUSTER_METADATA = {
 }
 
 def train_models():
-    global scaler, model, kmeans, MODEL_FEATURE_NAMES
+    global model, kmeans, MODEL_FEATURE_NAMES, encoders, target_encoder
+
     if not os.path.exists(CSV_FILE):
         print(f"Warning: {CSV_FILE} not found. Ensure dataset is in project root.")
         return
 
     df = pd.read_csv(CSV_FILE)
-    X_num = df[NUM_COLS]
-    X_cat = pd.get_dummies(df[CATEGORICAL_COLS], drop_first=True)
-    X = pd.concat([X_num, X_cat], axis=1)
-    MODEL_FEATURE_NAMES = X.columns.tolist()
 
-    X_scaled = scaler.fit_transform(X)
+    # Match the notebook: customer_id is not used for modelling.
+    df = df.drop('customer_id', axis=1)
+
+    # Match the notebook's categorical columns and individual LabelEncoders.
+    encoders = {}
+    for col in CATEGORICAL_COLS:
+        encoders[col] = LabelEncoder()
+        df[col] = encoders[col].fit_transform(df[col].astype(str))
+
+    # Match the notebook's target encoding.
+    target_encoder = LabelEncoder()
+    df["churn"] = target_encoder.fit_transform(df["churn"].astype(str))
+
+    X = df.drop('churn', axis=1)
     Y = df['churn']
 
+    MODEL_FEATURE_NAMES = X.columns.tolist()
+
     X_train, X_test, Y_train, Y_test = train_test_split(
-        X_scaled, Y, test_size=0.2, random_state=42
+        X, Y, test_size=0.2, random_state=42
     )
+
+    # Same model and parameters as the notebook.
     model.fit(X_train, Y_train)
     acc = model.score(X_test, Y_test)
     print(f"✓ Logistic Regression trained (Test Accuracy: {acc * 100:.2f}%)")
 
-    kmeans.fit(X_scaled)
-    print("✓ KMeans (4 clusters) trained on full scaled feature space.")
+    # Same KMeans model as the notebook.
+    kmeans.fit(X)
+    print("✓ KMeans (4 clusters) trained on full encoded feature space.")
+
 
 train_models()
+
+
+def predict_customer(user_data):
+    # Build one row with exactly the same feature order used during training.
+    full_row = pd.DataFrame(0, index=[0], columns=MODEL_FEATURE_NAMES)
+
+    for col in NUM_COLS:
+        full_row[col] = float(user_data.get(col, 0))
+
+    for col in CATEGORICAL_COLS:
+        value = str(user_data.get(col, ''))
+
+        # The notebook's LabelEncoder cannot predict an unseen category.
+        # Raise a clear error instead of silently using the wrong encoding.
+        if value not in encoders[col].classes_:
+            raise ValueError(
+                f"Unknown value '{value}' for {col}. "
+                f"Expected one of: {list(encoders[col].classes_)}"
+            )
+
+        full_row[col] = encoders[col].transform([value])[0]
+
+    churn_prob = float(model.predict_proba(full_row)[0][1]) * 100
+    cluster_idx = int(kmeans.predict(full_row)[0])
+
+    meta = CLUSTER_METADATA.get(cluster_idx, CLUSTER_METADATA[0])
+    discount = meta["discount"]
+    monthly = float(user_data.get('monthly_charges', 499.0))
+    savings = round((monthly * discount) / 100, 2)
+    new_price = round(monthly - savings, 2)
+
+    return {
+        "churn_rate": round(churn_prob, 1),
+        "cluster_id": cluster_idx,
+        "cluster_name": meta["name"],
+        "cluster_desc": meta["desc"],
+        "discount_percent": discount,
+        "discount_code": meta["code"],
+        "discount_perk": meta["perk"],
+        "savings": savings,
+        "new_price": new_price
+    }
+
 
 def predict_customer(user_data):
     row_num = [float(user_data.get(col, 0)) for col in NUM_COLS]
