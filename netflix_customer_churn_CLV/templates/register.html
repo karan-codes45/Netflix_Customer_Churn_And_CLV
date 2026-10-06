@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - Netflix AI Retention Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b0b0e; }
+    .brand-font { font-family: 'Bebas Neue', sans-serif; }
+    .netflix-glow { background: radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.15) 0%, rgba(11, 11, 14, 0.98) 70%); }
+  </style>
+</head>
+<body class="netflix-glow text-zinc-100 min-h-screen py-8 px-4">
+  {% import '_fields.html' as f %}
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center justify-between pb-6 mb-8 border-b border-zinc-800">
+      <div class="flex items-center space-x-3">
+        <span class="brand-font text-4xl tracking-wider text-[#E50914]">NETFLIX</span>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">Create Account</span>
+      </div>
+      <a href="{{ url_for('login') }}" class="text-xs font-medium text-zinc-400 hover:text-white transition">← Back to Login</a>
+    </div>
+
+    <div class="bg-zinc-900/90 border border-zinc-800 rounded-2xl p-8 backdrop-blur-xl shadow-2xl">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-white">Create your account</h1>
+        <p class="text-xs text-zinc-400 mt-1">Just the basics. We calculate your churn risk, 12-month value (CLV) and retention offer automatically.</p>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="mb-4 p-3 rounded-lg text-xs font-medium {% if category == 'success' %}bg-emerald-950/80 border border-emerald-700 text-emerald-300{% else %}bg-red-950/80 border border-red-800 text-red-300{% endif %}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('register') }}" class="space-y-6">
+
+        <div>
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-red-500 mb-3">1. Account</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {{ f.text('name', 'Full name', placeholder='e.g. Priya Sharma') }}
+            {{ f.text('email', 'Email', type='email', placeholder='priya@example.com') }}
+            {{ f.text('password', 'Password', type='password', placeholder='••••••••') }}
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-zinc-800">
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-red-500 mb-3">2. About you</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {{ f.number('age', 'Age', 28, min=15, max=90) }}
+            {{ f.select('gender', 'Gender', f.GENDERS) }}
+            {{ f.select('region', 'Region', f.REGIONS, 'West India') }}
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-zinc-800">
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-red-500 mb-3">3. Your plan</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {{ f.select('subscription_type', 'Subscription plan', f.PLANS, 'Standard', hint='The monthly price is set from the plan.') }}
+            {{ f.select('payment_method', 'Payment method', f.PAYMENTS, 'UPI') }}
+            {{ f.select('autopay_enabled', 'Autopay', [('1','On (auto-renew)'), ('0','Off (pay manually)')], '1') }}
+            {{ f.select('device', 'Main device', f.DEVICES, 'Smart TV') }}
+          </div>
+        </div>
+
+        <details class="pt-4 border-t border-zinc-800">
+          <summary class="text-xs font-semibold uppercase tracking-wider text-zinc-400 cursor-pointer hover:text-white">More preferences (optional)</summary>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+            {{ f.select('genre_preference', 'Favourite genre', f.GENRES, 'Action') }}
+            {{ f.select('has_kids_profile', 'Kids profile?', [('0','No'), ('1','Yes')], '0') }}
+            {{ f.number('number_of_profiles', 'Profiles on account', 2, min=1, max=5) }}
+          </div>
+        </details>
+
+        <p class="text-[11px] text-zinc-500 bg-zinc-950/60 border border-zinc-800 rounded-lg p-3">
+          We do not ask for watch hours, login history or support tickets. Netflix tracks these automatically.
+          In this demo, usage data is <span class="text-zinc-300">simulated</span> from real viewing patterns of similar customers, and you can change it later in <span class="text-zinc-300">Simulate usage</span>.
+        </p>
+
+        <button type="submit" class="w-full py-3 bg-[#E50914] hover:bg-red-700 text-white font-medium text-sm rounded-lg transition shadow-xl shadow-red-950/40">
+          Create Account &amp; See My Retention Forecast
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
