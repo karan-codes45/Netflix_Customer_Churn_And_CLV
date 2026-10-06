@@ -1,0 +1,89 @@
+movie_id,title,genres,overview,keywords,rating
+1,Inception,Sci-Fi|Thriller|Action,A skilled thief enters the dreams of others to steal secrets and attempts one impossible mission.,"dream,heist,mind,time,subconscious",8.8
+2,Interstellar,Sci-Fi|Drama|Adventure,Explorers travel through a wormhole in space to search for a new home for humanity.,"space,wormhole,astronaut,time,science",8.7
+3,The Matrix,Sci-Fi|Action|Thriller,A hacker discovers that reality is a simulated world and joins a rebellion against its controllers.,"simulation,hacker,matrix,reality,robot",8.7
+4,The Martian,Sci-Fi|Drama|Adventure,An astronaut stranded on Mars uses science and engineering to survive until rescue.,"mars,astronaut,survival,space,science",8.0
+5,Arrival,Sci-Fi|Drama|Mystery,A linguist works with scientists to communicate with mysterious visitors from another world.,"aliens,language,communication,time,science",7.9
+6,Blade Runner 2049,Sci-Fi|Thriller|Drama,A young blade runner discovers a secret that leads him to search for a former officer.,"android,future,detective,technology,identity",8.0
+7,Ex Machina,Sci-Fi|Thriller|Drama,A programmer is invited to evaluate an advanced artificial intelligence in an isolated research facility.,"ai,robot,technology,experiment,consciousness",7.7
+8,Edge of Tomorrow,Sci-Fi|Action,A soldier relives the same battle repeatedly and uses the experience to fight an alien invasion.,"alien,time,war,action,time-loop,soldier",7.9
+9,Avatar,Sci-Fi|Action|Adventure,A marine becomes part of an alien world and must choose between his mission and its people.,"pandora,alien,space,adventure,nature",7.8
+10,Gravity,Sci-Fi|Thriller|Drama,Two astronauts struggle to survive after their spacecraft is destroyed in orbit.,"space,astronaut,survival,orbit,disaster",7.7
+11,The Dark Knight,Action|Crime|Thriller,Batman faces a criminal mastermind who creates chaos across Gotham City.,"batman,joker,crime,hero,city",9.0
+12,Gladiator,Action|Drama|Adventure,A Roman general seeks revenge after being betrayed and forced into slavery.,"rome,war,revenge,gladiator,empire",8.5
+13,Mad Max: Fury Road,Action|Adventure|Sci-Fi,A group of rebels attempts to escape across a dangerous wasteland while being pursued by an army.,"wasteland,chase,rebel,survival,war",8.1
+14,John Wick,Action|Thriller|Crime,A retired assassin returns to his old life after a devastating personal loss.,"assassin,revenge,guns,crime,hitman",7.4
+15,Top Gun: Maverick,Action|Drama,A veteran pilot trains a new generation of elite aviators for a dangerous mission.,"pilot,aviation,military,training,mission",8.2
+16,Mission Impossible Fallout,Action|Thriller|Adventure,An elite agent races against time to stop a global terrorist threat.,"spy,mission,terrorist,agent,action",7.7
+17,Casino Royale,Action|Thriller|Adventure,A secret agent faces a dangerous financier in a high-stakes poker game.,"spy,poker,agent,crime,mission",8.0
+18,The Bourne Identity,Action|Thriller|Mystery,A man with memory loss discovers that he has extraordinary combat skills and a mysterious past.,"spy,memory,agent,identity,chase",7.8
+19,Se7en,Thriller|Crime|Mystery,Two detectives investigate a series of murders connected to a disturbing pattern.,"detective,murder,serial-killer,crime,invesigation",8.6
+20,The Silence of the Lambs,Thriller|Crime|Drama,A young FBI trainee seeks help from an imprisoned criminal to catch another killer.,"fbi,serial-killer,investigation,crime,psychology",8.6
+21,Gone Girl,Thriller|Mystery|Drama,A man's disappearance becomes a media spectacle as secrets about his marriage emerge.,"marriage,mystery,disappearance,crime,psychology",8.1
+22,Prisoners,Thriller|Crime|Mystery,A desperate father takes matters into his own hands after his daughter disappears.,"kidnapping,detective,crime,family,investigation",8.1
+23,A Quiet Place,Horror|Thriller|Drama,A family struggles to survive in a world where deadly creatures hunt by sound.,"survival,monster,family,silence,creature",7.5
+24,A Quiet Place Part II,Horror|Thriller|Sci-Fi,A family continues its journey through a dangerous world filled with creatures that hunt by sound.,"monster,survival,family,silence,post-apocalypse",7.2
+25,Shutter Island,Thriller|Mystery|Drama,A marshal investigates a disappearance at an isolated psychiatric facility and questions reality.,"island,detective,psychology,mystery,mental-health",8.2
+26,Memento,Thriller|Mystery|Crime,A man with short-term memory loss uses notes and clues while searching for his wife's killer.,"memory,murder,detective,mystery,revenge",8.4
+27,The Shawshank Redemption,Drama,A banker imprisoned for a crime he did not commit builds an unexpected friendship and hope.,"prison,friendship,hope,freedom,justice",9.3
+28,Forrest Gump,Drama|Romance,A kind-hearted man experiences major events in American history while following his own path.,"life,friendship,history,love,journey",8.8
+29,The Pursuit of Happyness,Drama,A struggling father works through hardship while trying to build a better life for his son.,"family,career,struggle,father,success",8.0
+30,The Green Mile,Drama|Fantasy|Crime,A prison guard develops a friendship with an inmate who appears to possess a mysterious gift.,"prison,friendship,justice,supernatural,death",8.6
+31,Good Will Hunting,Drama|Romance,A gifted young man receives help from a therapist while confronting his difficult past.,"genius,therapy,friendship,education,emotion",8.3
+32,Whiplash,Drama|Music,A young drummer faces intense pressure from an ambitious and demanding music instructor.,"music,drummer,ambition,competition,mentor",8.5
+33,The Hangover,Comedy,Three friends search for their missing groom after a chaotic night in Las Vegas.,"friends,wedding,las-vegas,party,comedy",7.7
+34,Superbad,Comedy|Teen,Two friends try to make the most of their final days of high school.,"school,friends,party,teenagers,comedy",7.6
+35,21 Jump Street,Comedy|Action,Two young police officers go undercover at a high school to investigate a drug operation.,"police,school,undercover,drugs,comedy",7.2
+36,Game Night,Comedy|Thriller,A group of friends gets caught in a real criminal mystery while playing a game.,"friends,mystery,crime,game,comedy",6.9
+37,Free Guy,Comedy|Action|Sci-Fi,A bank employee discovers that he is actually a character inside a video game.,"video-game,ai,hero,technology,comedy",7.1
+38,Jumanji Welcome to the Jungle,Comedy|Action|Adventure,Teenagers become video game avatars and must complete a dangerous adventure to escape.,"game,adventure,jungle,friends,comedy",6.9
+39,The Notebook,Romance|Drama,A couple from different backgrounds fall deeply in love and face difficult circumstances.,"love,relationship,romance,family,memories",7.8
+40,La La Land,Romance|Drama|Music,An aspiring actress and a jazz musician pursue their dreams while falling in love.,"music,love,dreams,hollywood,relationship",8.0
+41,Me Before You,Romance|Drama,A young woman develops a life-changing relationship with a man who has become disabled.,"love,relationship,family,care,emotion",7.4
+42,Crazy Rich Asians,Romance|Comedy|Drama,A woman discovers the wealthy and complicated family background of her boyfriend.,"romance,family,wealth,wedding,comedy",6.9
+43,About Time,Romance|Drama|Fantasy,A young man discovers he can travel through time and uses the ability to improve his relationships.,"time-travel,love,family,life,romance",7.8
+44,500 Days of Summer,Romance|Drama|Comedy,A young man reflects on a relationship that did not unfold as he expected.,"relationship,love,breakup,memories,romance",7.7
+45,The Conjuring,Horror|Mystery|Thriller,Paranormal investigators help a family experiencing terrifying events in their new home.,"ghost,haunted-house,demon,family,paranormal",7.5
+46,Insidious,Horror|Mystery|Thriller,A family seeks help when their son becomes mysteriously trapped in a dangerous supernatural state.,"ghost,demon,family,haunted,supernatural",6.8
+47,It,Horror|Drama|Mystery,A group of children confronts a terrifying creature that returns to their town.,"clown,friends,monster,childhood,horror",7.3
+48,The Exorcist,Horror|Drama,A mother seeks help after her daughter begins experiencing terrifying supernatural behavior.,"demon,possession,family,exorcism,supernatural",8.1
+49,Hereditary,Horror|Drama|Mystery,A family begins uncovering disturbing secrets after the death of their grandmother.,"family,secret,supernatural,grief,horror",7.3
+50,Get Out,Horror|Mystery|Thriller,A young man discovers disturbing secrets while visiting his girlfriend's family.,"family,racism,mystery,psychology,horror",7.7
+51,The Godfather,Crime|Drama,The aging head of a powerful crime family prepares his reluctant son to take over.,"mafia,family,crime,power,legacy",9.2
+52,The Departed,Crime|Thriller|Drama,An undercover officer and a criminal informant work inside opposing organizations.,"mafia,police,undercover,crime,gang",8.5
+53,Scarface,Crime|Drama,A Cuban immigrant rises through the criminal world and builds a powerful drug empire.,"gangster,drug,crime,power,mafia",8.3
+54,Heat,Crime|Action|Thriller,A skilled detective pursues a professional thief while both struggle with their personal lives.,"heist,detective,robbery,crime,police",8.3
+55,Zodiac,Crime|Mystery|Thriller,Investigators and journalists become obsessed with identifying an unknown serial killer.,"serial-killer,detective,newspaper,mystery,investigation",7.7
+56,The Wolf of Wall Street,Crime|Comedy|Drama,A stockbroker builds a lavish financial empire through fraud and excessive ambition.,"finance,stock-market,fraud,wealth,crime",8.2
+57,Toy Story,Animation|Comedy|Adventure,"A group of toys comes to life and experiences friendship, jealousy and adventure.","toys,friends,childhood,adventure,animation",8.3
+58,Coco,Animation|Fantasy|Drama,A young musician enters the world of the dead while discovering his family's history.,"music,family,death,mexico,tradition",8.4
+59,Up,Animation|Adventure|Comedy,An elderly man travels to South America in a house carried by balloons.,"adventure,friendship,family,journey,animation",8.3
+60,Finding Nemo,Animation|Adventure|Comedy,A father crosses the ocean to find his missing son and meets unexpected friends.,"ocean,fish,family,adventure,friendship",8.2
+61,Inside Out,Animation|Comedy|Drama,Emotions inside a young girl's mind try to help her deal with a major life change.,"emotions,mind,family,childhood,psychology",8.1
+62,How to Train Your Dragon,Animation|Fantasy|Adventure,A young Viking forms an unlikely friendship with a dragon and changes his community.,"dragon,friendship,viking,fantasy,adventure",8.1
+63,Harry Potter and the Sorcerer's Stone,Fantasy|Adventure,A young orphan discovers he is a wizard and begins his education at a magical school.,"magic,wizard,school,friendship,fantasy",7.6
+64,The Lord of the Rings: The Fellowship of the Ring,Fantasy|Adventure|Drama,A young hobbit begins a dangerous journey to destroy a powerful magical ring.,"magic,ring,hobbit,war,adventure",8.8
+65,The Hobbit: An Unexpected Journey,Fantasy|Adventure,A reluctant hobbit joins a group of dwarves on a quest to reclaim their homeland.,"hobbit,dragon,dwarves,quest,adventure",7.8
+66,Doctor Strange,Fantasy|Action|Adventure,A brilliant surgeon discovers mystical powers after a life-changing accident.,"magic,superhero,doctor,mystical,marvel",7.5
+67,Pirates of the Caribbean,Fantasy|Action|Adventure,A clever pirate and an unlikely ally embark on a rescue mission involving a cursed crew.,"pirates,curse,treasure,adventure,ocean",8.0
+68,Pan's Labyrinth,Fantasy|Drama|War,A young girl escapes into a mysterious fantasy world during a dangerous period of war.,"fantasy,war,child,mystery,creature",8.2
+69,The Social Network,Drama|Biography,"The creation of a major social networking platform creates ambition, conflict and legal battles.","facebook,technology,startup,entrepreneur,computer",7.8
+70,Moneyball,Drama|Biography|Sport,A baseball manager uses data and unconventional analysis to build a competitive team.,"baseball,data,analytics,sports,strategy",7.6
+71,Steve Jobs,Drama|Biography,A portrait of a technology entrepreneur navigating product launches and personal conflicts.,"apple,technology,entrepreneur,innovation,business",7.2
+72,The Imitation Game,Drama|Biography|Thriller,A mathematician works to break an encrypted wartime code and help change the course of history.,"code,mathematics,war,computer,cryptography",8.0
+73,Ocean's Eleven,Crime|Comedy|Thriller,A group of skilled criminals plans an elaborate robbery of several Las Vegas casinos.,"heist,casino,robbery,team,crime",7.7
+74,Now You See Me,Crime|Mystery|Thriller,A group of illusionists performs spectacular heists while being pursued by investigators.,"magic,heist,illusion,crime,detective",7.2
+75,Knives Out,Mystery|Comedy|Crime,A detective investigates the death of a wealthy author while questioning his complicated family.,"murder,detective,family,mystery,investigation",7.9
+76,Murder on the Orient Express,Mystery|Crime|Drama,A detective investigates a murder aboard a luxury train where every passenger is a suspect.,"train,murder,detective,mystery,crime",6.5
+77,The Incredibles,Animation|Action|Adventure,A family of superheroes returns to action while trying to maintain a normal life.,"superhero,family,action,animation,adventure",8.0
+78,Kung Fu Panda,Animation|Action|Comedy,An unlikely panda becomes a martial arts hero and learns to believe in himself.,"kung-fu,panda,martial-arts,hero,comedy",7.6
+79,Ratatouille,Animation|Comedy|Drama,A talented rat dreams of becoming a chef and forms an unusual partnership in a Paris restaurant.,"chef,cooking,paris,food,friendship",8.1
+80,Wall-E,Animation|Sci-Fi|Adventure,A lonely robot cleaning an abandoned Earth discovers a new purpose and connection.,"robot,earth,space,environment,love",8.4
+81,Planet Earth II,Documentary|Nature,A documentary series exploring wildlife and spectacular natural environments around the world.,"nature,wildlife,animals,earth,environment",9.4
+82,Our Planet,Documentary|Nature,A documentary journey through diverse habitats and the animals that depend on them.,"nature,wildlife,environment,animals,earth",9.3
+83,Free Solo,Documentary|Sport|Adventure,A climber attempts to scale a massive rock wall without ropes or safety equipment.,"climbing,mountain,adventure,sport,challenge",8.1
+84,The Last Dance,Documentary|Sport,A documentary series following Michael Jordan and the Chicago Bulls during their final championship run.,"basketball,sport,michael-jordan,championship,team",9.0
+85,Finding Dory,Animation|Kids|Adventure,A forgetful fish travels across the ocean to find her parents with help from her friends.,"fish,family,ocean,friendship,adventure",7.2
+86,Moana,Animation|Kids|Adventure,A young islander sails across the ocean on a mission to save her people and discover her identity.,"ocean,island,adventure,family,hero",7.6
+87,Zootopia,Animation|Kids|Comedy,A determined rabbit police officer teams up with a clever fox to solve a mystery in a city of animals.,"animals,police,mystery,friendship,comedy",8.0
+88,The Lion King,Animation|Kids|Drama|Adventure,A young lion must find the courage to take his place as king after a family tragedy.,"lion,family,kingdom,friendship,adventure",8.5

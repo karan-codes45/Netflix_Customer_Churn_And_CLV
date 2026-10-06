@@ -1,0 +1,37 @@
+{# Shared form helpers + option lists, used by register.html and edit_profile.html #}
+{% set GENDERS  = [('Female','Female'), ('Male','Male')] %}
+{% set REGIONS  = [('West India','West India'), ('South India','South India'), ('North India','North India'), ('East India','East India'), ('Central India','Central India')] %}
+{% set PLANS    = [('Basic','Basic - ₹199/month'), ('Standard','Standard - ₹499/month'), ('Premium','Premium - ₹799/month')] %}
+{% set PAYMENTS = [('UPI','UPI'), ('Credit Card','Credit Card'), ('Debit Card','Debit Card'), ('Net Banking','Net Banking'), ('Gift Card','Gift Card')] %}
+{% set DEVICES  = [('Smart TV','Smart TV'), ('Mobile','Mobile'), ('Laptop','Laptop'), ('Tablet','Tablet')] %}
+{% set GENRES   = [('Action','Action'), ('Thriller','Thriller'), ('Drama','Drama'), ('Comedy','Comedy'), ('Romance','Romance'), ('Documentary','Documentary'), ('Kids','Kids'), ('Sci-Fi','Sci-Fi'), ('Animation','Animation'), ('Crime','Crime'), ('Fantasy','Fantasy'), ('Adventure','Adventure'), ('Mystery','Mystery')] %}
+{% set YESNO    = [('1','Yes'), ('0','No')] %}
+
+{% macro select(name, label, options, current=none, hint='') %}
+<div>
+  <label class="block text-xs text-zinc-400 mb-1">{{ label }}</label>
+  <select name="{{ name }}" class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E50914] focus:outline-none">
+    {% for value, text in options %}
+    <option value="{{ value }}" {% if current is not none and current|string == value|string %}selected{% endif %}>{{ text }}</option>
+    {% endfor %}
+  </select>
+  {% if hint %}<p class="text-[11px] text-zinc-500 mt-1">{{ hint }}</p>{% endif %}
+</div>
+{% endmacro %}
+
+{% macro number(name, label, current, min=none, max=none, step=none, hint='') %}
+<div>
+  <label class="block text-xs text-zinc-400 mb-1">{{ label }}</label>
+  <input type="number" name="{{ name }}" value="{{ current }}" {% if min is not none %}min="{{ min }}"{% endif %} {% if max is not none %}max="{{ max }}"{% endif %} {% if step %}step="{{ step }}"{% endif %} required
+    class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E50914] focus:outline-none">
+  {% if hint %}<p class="text-[11px] text-zinc-500 mt-1">{{ hint }}</p>{% endif %}
+</div>
+{% endmacro %}
+
+{% macro text(name, label, current='', type='text', placeholder='') %}
+<div>
+  <label class="block text-xs text-zinc-400 mb-1">{{ label }}</label>
+  <input type="{{ type }}" name="{{ name }}" value="{{ current }}" placeholder="{{ placeholder }}" required
+    class="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white focus:border-[#E50914] focus:outline-none">
+</div>
+{% endmacro %}

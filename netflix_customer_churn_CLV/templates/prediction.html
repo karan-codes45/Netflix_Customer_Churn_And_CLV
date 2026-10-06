@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Netflix Insights</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0b0e;
+    }
+
+    .brand-font {
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .netflix-glow {
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(229, 9, 20, 0.25) 0%,
+          rgba(11, 11, 14, 0.98) 65%
+        );
+    }
+
+    .welcome-glow {
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(229, 9, 20, 0.30),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 10% 80%,
+          rgba(124, 58, 237, 0.18),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(24, 24, 27, 0.98),
+          rgba(9, 9, 11, 0.98)
+        );
+    }
+
+    .profile-avatar {
+      background: linear-gradient(
+        135deg,
+        #e50914,
+        #8b0000
+      );
+      box-shadow:
+        0 0 25px rgba(229, 9, 20, 0.35);
+    }
+
+    .card-hover {
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-3px);
+      border-color: #3f3f46;
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.30);
+    }
+
+  </style>
+</head>
+
+
+<body class="netflix-glow text-zinc-100 min-h-screen py-8 px-4">
+
+  <div class="max-w-6xl mx-auto">
+
+
+    <!-- ========================================================= -->
+    <!-- NAVBAR -->
+    <!-- ========================================================= -->
+
+    <header
+      class="flex flex-col sm:flex-row sm:items-center
+             justify-between gap-4 pb-6 mb-6
+             border-b border-zinc-800"
+    >
+
+      <div class="flex items-center space-x-3">
+
+        <span
+          class="brand-font text-4xl tracking-wider text-[#E50914]"
+        >
+          NETFLIX
+        </span>
+
+        <span
+          class="text-xs uppercase font-semibold
+                 px-2 py-0.5 rounded
+                 bg-zinc-800 text-zinc-300"
+        >
+          Customer Insights
+        </span>
+
+      </div>
+
+
+      <div class="flex items-center gap-3">
+
+        <!-- EDIT PROFILE -->
+
+        <a
+          href="{{ url_for('edit_profile') }}"
+          class="inline-flex items-center gap-1.5
+                 px-3.5 py-2 text-xs font-semibold
+                 text-white bg-zinc-800
+                 hover:bg-zinc-700
+                 border border-zinc-600
+                 rounded-lg shadow transition"
+        >
+
+          <svg
+            class="w-3.5 h-3.5 text-amber-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+            />
+          </svg>
+
+          Edit Profile
+
+        </a>
+
+
+        <!-- LOGOUT -->
+
+        <a
+          href="{{ url_for('logout') }}"
+          class="inline-flex items-center gap-1.5
+                 px-3.5 py-2 text-xs font-bold
+                 text-red-200 bg-red-950
+                 hover:bg-red-800
+                 hover:text-white
+                 border border-red-700
+                 rounded-lg shadow-md transition"
+        >
+
+          <svg
+            class="w-3.5 h-3.5 text-red-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+
+          Logout
+
+        </a>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- ========================================================= -->
+    <!-- DECORATIVE WELCOME SECTION -->
+    <!-- ========================================================= -->
+
+    <section
+      class="welcome-glow
+             border border-zinc-800
+             rounded-3xl
+             p-6 md:p-8
+             mb-8
+             shadow-2xl
+             overflow-hidden
+             relative"
+    >
+
+      <!-- Decorative circle -->
+
+      <div
+        class="absolute -right-16 -top-16
+               w-48 h-48
+               rounded-full
+               bg-red-600/10
+               blur-2xl"
+      ></div>
+
+
+      <div
+        class="absolute -left-16 -bottom-20
+               w-48 h-48
+               rounded-full
+               bg-purple-600/10
+               blur-2xl"
+      ></div>
+
+
+      <div
+        class="relative z-10
+               flex flex-col md:flex-row
+               md:items-center
+               justify-between
+               gap-6"
+      >
+
+        <!-- LEFT -->
+
+        <div>
+
+          <div class="flex items-center gap-3 mb-4">
+
+            <span
+              class="text-xs uppercase
+                     tracking-[0.25em]
+                     text-red-400
+                     font-semibold"
+            >
+              Your Personal Dashboard
+            </span>
+
+            <span
+              class="h-px w-12 bg-red-700"
+            ></span>
+
+          </div>
+
+
+          <h1
+            class="text-3xl md:text-5xl
+                   font-extrabold
+                   tracking-tight"
+          >
+
+            Welcome back,
+
+            <span class="text-red-500">
+              {{ user.name }}
+            </span>
+
+            <span>
+              👋
+            </span>
+
+          </h1>
+
+
+          <p
+            class="text-sm md:text-base
+                   text-zinc-400
+                   mt-3
+                   max-w-2xl
+                   leading-relaxed"
+          >
+
+            Here is your personalized Netflix
+            customer insight. Check your churn risk,
+            understand your profile signals, unlock
+            your retention offer and discover movies
+            selected for your taste.
+
+          </p>
+
+
+          <!-- QUICK TAGS -->
+
+          <div
+            class="flex flex-wrap
+                   items-center
+                   gap-2
+                   mt-5"
+          >
+
+            <span
+              class="px-3 py-1.5
+                     rounded-full
+                     bg-red-950/70
+                     border border-red-900
+                     text-xs
+                     text-red-300"
+            >
+              🎬 Netflix Insights
+            </span>
+
+
+            <span
+              class="px-3 py-1.5
+                     rounded-full
+                     bg-zinc-900
+                     border border-zinc-700
+                     text-xs
+                     text-zinc-300"
+            >
+              🤖 ML Powered
+            </span>
+
+
+            <span
+              class="px-3 py-1.5
+                     rounded-full
+                     bg-zinc-900
+                     border border-zinc-700
+                     text-xs
+                     text-zinc-300"
+            >
+              🎯 Personalized
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- RIGHT PROFILE -->
+
+        <div
+          class="shrink-0
+                 bg-black/30
+                 border border-zinc-700
+                 rounded-2xl
+                 p-5
+                 min-w-[230px]"
+        >
+
+          <div
+            class="flex
+                   items-center
+                   gap-4"
+          >
+
+            <!-- Avatar -->
+
+            <div
+              class="profile-avatar
+                     w-16 h-16
+                     rounded-full
+                     flex
+                     items-center
+                     justify-center
+                     text-2xl
+                     font-extrabold
+                     text-white"
+            >
+
+              {{ user.name[0]|upper }}
+
+            </div>
+
+
+            <div>
+
+              <p
+                class="text-[10px]
+                       uppercase
+                       tracking-widest
+                       text-zinc-500"
+              >
+                Subscriber
+              </p>
+
+
+              <p
+                class="text-lg
+                       font-bold
+                       text-white
+                       mt-1"
+              >
+                {{ user.name }}
+              </p>
+
+
+              <p
+                class="text-xs
+                       text-red-400
+                       mt-1"
+              >
+                🎭 {{ user.genre_preference }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================= -->
+    <!-- FLASH MESSAGE -->
+    <!-- ========================================================= -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+      {% if messages %}
+
+        {% for category, message in messages %}
+
+          <div
+            class="mb-6 p-4
+                   rounded-xl
+                   text-xs font-medium
+                   bg-emerald-950/80
+                   border border-emerald-700
+                   text-emerald-300
+                   shadow"
+          >
+            {{ message }}
+          </div>
+
+        {% endfor %}
+
+      {% endif %}
+
+    {% endwith %}
+
+
+
+    <!-- ========================================================= -->
+    <!-- MAIN PREDICTION CARDS -->
+    <!-- ========================================================= -->
+
+    <div
+      class="grid
+             grid-cols-1
+             md:grid-cols-3
+             gap-6
+             mb-8"
+    >
+
+
+      <!-- ======================================================= -->
+      <!-- CHURN RISK -->
+      <!-- ======================================================= -->
+
+      <div
+        class="card-hover
+               bg-zinc-900/90
+               border border-zinc-800
+               rounded-2xl
+               p-6
+               flex flex-col
+               justify-between
+               shadow-xl"
+      >
+
+        <div>
+
+          <span
+            class="text-xs
+                   font-semibold
+                   text-zinc-400
+                   uppercase
+                   tracking-wider"
+          >
+            Your Churn Risk
+          </span>
+
+
+          <div
+            class="mt-4
+                   flex
+                   items-baseline
+                   gap-2"
+          >
+
+            <span
+              class="text-5xl
+                     font-extrabold
+
+                     {% if result.churn_rate >= 50 %}
+                       text-red-500
+
+                     {% elif result.churn_rate >= 35 %}
+                       text-amber-400
+
+                     {% else %}
+                       text-emerald-400
+                     {% endif %}"
+            >
+              {{ result.churn_rate }}%
+            </span>
+
+
+            <span
+              class="text-xs
+                     font-medium
+                     px-2 py-0.5
+                     rounded
+
+                     {% if result.churn_rate >= 50 %}
+                       bg-red-950
+                       text-red-300
+                       border border-red-800
+
+                     {% elif result.churn_rate >= 35 %}
+                       bg-amber-950
+                       text-amber-300
+                       border border-amber-800
+
+                     {% else %}
+                       bg-emerald-950
+                       text-emerald-300
+                       border border-emerald-800
+                     {% endif %}"
+            >
+
+              {% if result.churn_rate >= 50 %}
+                High Risk
+
+              {% elif result.churn_rate >= 35 %}
+                Moderate Risk
+
+              {% else %}
+                Low Risk
+              {% endif %}
+
+            </span>
+
+          </div>
+
+
+          <p
+            class="text-xs
+                   text-zinc-400
+                   mt-3
+                   leading-relaxed"
+          >
+            Logistic Regression estimate of your
+            probability of churn. Treat this prediction
+            as a guide, not a certainty.
+          </p>
+
+        </div>
+
+
+        <!-- Progress -->
+
+        <div
+          class="w-full
+                 bg-zinc-800
+                 h-2
+                 rounded-full
+                 mt-6
+                 overflow-hidden"
+        >
+
+          <div
+            class="h-full
+
+                   {% if result.churn_rate >= 50 %}
+                     bg-red-600
+
+                   {% elif result.churn_rate >= 35 %}
+                     bg-amber-500
+
+                   {% else %}
+                     bg-emerald-500
+                   {% endif %}"
+
+            style="width: {{ result.churn_rate }}%"
+          >
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ======================================================= -->
+      <!-- WHY RISK -->
+      <!-- ======================================================= -->
+
+      <div
+        class="card-hover
+               bg-zinc-900/90
+               border border-zinc-800
+               rounded-2xl
+               p-6
+               shadow-xl"
+      >
+
+        <div
+          class="flex
+                 items-start
+                 justify-between
+                 gap-3
+                 mb-5"
+        >
+
+          <div>
+
+            <span
+              class="text-xs
+                     font-semibold
+                     text-zinc-400
+                     uppercase
+                     tracking-wider"
+            >
+              Why Your Risk Looks This Way
+            </span>
+
+
+            <h2
+              class="text-lg
+                     font-bold
+                     text-white
+                     mt-2"
+            >
+              Key Profile Signals
+            </h2>
+
+          </div>
+
+
+          <div
+            class="w-10 h-10
+                   rounded-xl
+                   bg-purple-950
+                   border border-purple-900
+                   flex items-center
+                   justify-center"
+          >
+            🔍
+          </div>
+
+        </div>
+
+
+        <div class="space-y-3">
+
+          {% for factor in risk_factors %}
+
+          <div
+            class="flex
+                   items-start
+                   gap-3
+                   p-3
+                   rounded-xl
+                   bg-zinc-950
+                   border border-zinc-800"
+          >
+
+            <div
+              class="w-6 h-6
+                     rounded-full
+                     bg-purple-950
+                     border border-purple-800
+                     text-purple-400
+                     flex
+                     items-center
+                     justify-center
+                     flex-shrink-0
+                     text-xs"
+            >
+              ✓
+            </div>
+
+
+            <p
+              class="text-xs
+                     text-zinc-300
+                     leading-relaxed"
+            >
+              {{ factor }}
+            </p>
+
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+
+        <p
+          class="text-[10px]
+                 text-zinc-500
+                 mt-4
+                 leading-relaxed"
+        >
+          These are transparent profile signals shown
+          to explain the displayed risk context.
+          They are not SHAP feature-importance values.
+        </p>
+
+      </div>
+
+
+
+      <!-- ======================================================= -->
+      <!-- RETENTION OFFER -->
+      <!-- ======================================================= -->
+
+      <div
+        class="card-hover
+               bg-gradient-to-br
+               from-red-950/60
+               to-zinc-900
+               border border-red-800/60
+               rounded-2xl
+               p-6
+               flex flex-col
+               justify-between
+               shadow-xl"
+      >
+
+        <div>
+
+          <span
+            class="text-xs
+                   font-semibold
+                   text-red-400
+                   uppercase
+                   tracking-wider"
+          >
+            Your Retention Offer
+          </span>
+
+
+          <div
+            class="mt-3
+                   flex
+                   items-baseline
+                   gap-2"
+          >
+
+            <span
+              class="text-4xl
+                     font-extrabold
+                     text-white"
+            >
+
+              {% if result.discount_percent %}
+                {{ result.discount_percent }}% OFF
+              {% else %}
+                No discount
+              {% endif %}
+
+            </span>
+
+
+            <span
+              class="text-xs
+                     font-mono
+                     bg-red-900/80
+                     text-red-200
+                     px-2
+                     py-0.5
+                     rounded
+                     border border-red-700"
+            >
+              {{ result.discount_code }}
+            </span>
+
+          </div>
+
+
+          <p
+            class="text-xs
+                   text-zinc-300
+                   mt-3
+                   leading-relaxed"
+          >
+            {{ result.discount_perk }}
+          </p>
+
+        </div>
+
+
+        <div
+          class="pt-4
+                 border-t
+                 border-red-900/50
+                 flex
+                 justify-between
+                 items-center
+                 text-xs"
+        >
+
+          <div>
+
+            <span
+              class="text-zinc-400
+                     block"
+            >
+              Adjusted Price
+            </span>
+
+            <span
+              class="text-sm
+                     font-bold
+                     text-emerald-400"
+            >
+              ₹{{ result.new_price }}/mo
+            </span>
+
+          </div>
+
+
+          <div class="text-right">
+
+            <span
+              class="text-zinc-400
+                     block"
+            >
+              Monthly Savings
+            </span>
+
+            <span
+              class="text-sm
+                     font-semibold
+                     text-white"
+            >
+              ₹{{ result.savings }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ========================================================= -->
+    <!-- RETENTION OFFER EXPLANATION -->
+    <!-- ========================================================= -->
+
+    <div
+      class="mb-8
+             bg-zinc-900/70
+             border border-zinc-800
+             rounded-xl
+             px-5 py-4"
+    >
+
+      <div
+        class="flex
+               items-start
+               gap-3"
+      >
+
+        <span class="text-lg">
+          💡
+        </span>
+
+
+        <div>
+
+          <p
+            class="text-xs
+                   font-semibold
+                   text-zinc-200"
+          >
+            How your retention offer is decided
+          </p>
+
+
+          <p
+            class="text-[11px]
+                   text-zinc-500
+                   mt-1
+                   leading-relaxed"
+          >
+            The Logistic Regression model predicts your
+            churn probability. Predefined business rules
+            then use that probability to determine the
+            appropriate retention offer.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ========================================================= -->
+    <!-- MOVIE RECOMMENDATIONS -->
+    <!-- ========================================================= -->
+
+    <div
+      class="bg-zinc-900/90
+             border border-zinc-800
+             rounded-2xl
+             p-6
+             shadow-xl
+             mb-6"
+    >
+
+      <div
+        class="flex
+               flex-col
+               sm:flex-row
+               sm:items-center
+               sm:justify-between
+               gap-3
+               mb-5"
+      >
+
+        <div>
+
+          <h3
+            class="text-lg
+                   font-bold
+                   text-white"
+          >
+            Recommended Movies For You 🎬
+          </h3>
+
+
+          <p
+            class="text-xs
+                   text-zinc-400
+                   mt-1"
+          >
+            Based on your preferred genre:
+
+            <span
+              class="text-red-400
+                     font-semibold"
+            >
+              {{ user.genre_preference }}
+            </span>
+
+          </p>
+
+        </div>
+
+
+        <span
+          class="text-[11px]
+                 text-zinc-500"
+        >
+          Genre Filtering + TF-IDF + Cosine Similarity
+        </span>
+
+      </div>
+
+
+
+      <div
+        class="grid
+               grid-cols-1
+               md:grid-cols-2
+               lg:grid-cols-5
+               gap-4"
+      >
+
+        {% for movie in recommendations %}
+
+        <div
+          class="card-hover
+                 bg-zinc-950
+                 border border-zinc-800
+                 rounded-xl
+                 p-4"
+        >
+
+          <!-- Movie icon -->
+
+          <div
+            class="h-20
+                   rounded-lg
+                   bg-gradient-to-br
+                   from-red-950
+                   via-zinc-900
+                   to-purple-950
+                   border border-zinc-800
+                   flex
+                   items-center
+                   justify-center
+                   mb-4"
+          >
+
+            <span class="text-3xl">
+              🎬
+            </span>
+
+          </div>
+
+
+          <div
+            class="flex
+                   items-start
+                   justify-between
+                   gap-2"
+          >
+
+            <h4
+              class="text-sm
+                     font-bold
+                     text-white
+                     leading-tight"
+            >
+              {{ movie.title }}
+            </h4>
+
+
+            <span
+              class="text-[10px]
+                     text-emerald-400
+                     whitespace-nowrap"
+            >
+              ⭐ {{ movie.rating }}
+            </span>
+
+          </div>
+
+
+          <p
+            class="text-[10px]
+                   text-zinc-500
+                   mt-2
+                   leading-relaxed"
+          >
+            {{ movie.genres }}
+          </p>
+
+
+          <p
+            class="text-[11px]
+                   text-zinc-400
+                   mt-3
+                   leading-relaxed"
+          >
+            {{ movie.overview }}
+          </p>
+
+
+          <div
+            class="mt-4
+                   pt-3
+                   border-t border-zinc-800
+                   flex
+                   items-center
+                   justify-between"
+          >
+
+            <span
+              class="text-[10px]
+                     text-zinc-500"
+            >
+              Match
+            </span>
+
+
+            <span
+              class="text-xs
+                     font-bold
+                     text-red-400"
+            >
+              {{ movie.match_percent }}%
+            </span>
+
+          </div>
+
+        </div>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ========================================================= -->
+    <!-- DEMO DATA NOTE -->
+    <!-- ========================================================= -->
+
+    <div
+      class="mb-6
+             bg-zinc-900/60
+             border border-zinc-800
+             rounded-lg
+             px-4 py-3"
+    >
+
+      <p
+        class="text-[11px]
+               text-zinc-500
+               leading-relaxed"
+      >
+
+        <span class="text-zinc-300 font-semibold">
+          Note:
+        </span>
+
+        Watch hours, login history and support tickets
+        are demo activity signals. In a real production
+        system, these values would come from actual
+        user activity logs.
+
+        <a
+          href="{{ url_for('edit_profile') }}"
+          class="text-red-400
+                 hover:text-red-300
+                 underline
+                 underline-offset-4"
+        >
+          Simulate usage →
+        </a>
+
+      </p>
+
+    </div>
+
+
+
+    <!-- ========================================================= -->
+    <!-- SUBSCRIBER PROFILE TELEMETRY -->
+    <!-- ========================================================= -->
+
+    <div
+      class="bg-zinc-900/90
+             border border-zinc-800
+             rounded-2xl
+             p-6
+             shadow-xl"
+    >
+
+      <div
+        class="flex
+               flex-col
+               sm:flex-row
+               sm:items-center
+               sm:justify-between
+               gap-3
+               mb-5"
+      >
+
+        <div>
+
+          <h3
+            class="text-sm
+                   font-semibold
+                   text-white"
+          >
+            Subscriber Profile
+          </h3>
+
+
+          <p
+            class="text-[11px]
+                   text-zinc-500
+                   mt-1"
+          >
+            Profile telemetry stored in MySQL
+          </p>
+
+        </div>
+
+
+        <a
+          href="{{ url_for('edit_profile') }}"
+          class="text-xs
+                 text-red-400
+                 hover:text-red-300
+                 font-semibold
+                 underline
+                 underline-offset-4"
+        >
+          Change Parameters & Recalculate Score →
+        </a>
+
+      </div>
+
+
+
+      <div
+        class="grid
+               grid-cols-2
+               sm:grid-cols-4
+               gap-4
+               text-xs"
+      >
+
+        <!-- PLAN -->
+
+        <div
+          class="p-3
+                 bg-zinc-950
+                 rounded-lg
+                 border border-zinc-800"
+        >
+
+          <span
+            class="text-zinc-500
+                   block"
+          >
+            Plan Tier
+          </span>
+
+
+          <span
+            class="text-white
+                   font-medium
+                   text-sm"
+          >
+            {{ user.subscription_type }}
+
+            (₹{{ user.monthly_charges }})
+          </span>
+
+        </div>
+
+
+
+        <!-- DEVICE -->
+
+        <div
+          class="p-3
+                 bg-zinc-950
+                 rounded-lg
+                 border border-zinc-800"
+        >
+
+          <span
+            class="text-zinc-500
+                   block"
+          >
+            Primary Device
+          </span>
+
+
+          <span
+            class="text-white
+                   font-medium
+                   text-sm"
+          >
+            {{ user.device }}
+
+            ({{ user.num_devices_active }} active)
+          </span>
+
+        </div>
+
+
+
+        <!-- PAYMENT -->
+
+        <div
+          class="p-3
+                 bg-zinc-950
+                 rounded-lg
+                 border border-zinc-800"
+        >
+
+          <span
+            class="text-zinc-500
+                   block"
+          >
+            Payment Method
+          </span>
+
+
+          <span
+            class="text-white
+                   font-medium
+                   text-sm"
+          >
+
+            {{ user.payment_method }}
+
+            {% if user.autopay_enabled %}
+              (Autopay ON)
+            {% else %}
+              (Autopay OFF)
+            {% endif %}
+
+          </span>
+
+        </div>
+
+
+
+        <!-- GENRE -->
+
+        <div
+          class="p-3
+                 bg-zinc-950
+                 rounded-lg
+                 border border-zinc-800"
+        >
+
+          <span
+            class="text-zinc-500
+                   block"
+          >
+            Preferred Genre
+          </span>
+
+
+          <span
+            class="text-white
+                   font-medium
+                   text-sm"
+          >
+            {{ user.genre_preference }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ========================================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================================= -->
+
+    <footer
+      class="text-center
+             py-8
+             mt-6"
+    >
+
+      <p
+        class="text-[11px]
+               text-zinc-600"
+      >
+        Netflix Customer Insights
+        • Churn Prediction
+        • Retention
+        • Movie Recommendations
+      </p>
+
+    </footer>
+
+
+  </div>
+
+</body>
+</html>
